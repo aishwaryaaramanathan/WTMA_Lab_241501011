@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Online Resume Builder</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #e6edf3;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #1f3a5f;
+    }
+
+    form {
+      background-color: #ffffff;
+      padding: 25px;
+      max-width: 900px;
+      margin: auto;
+      border-radius: 8px;
+    }
+
+    h3 {
+      color: #1f618d;
+      border-bottom: 2px solid #d6eaf8;
+      padding-bottom: 5px;
+    }
+
+    .row {
+      display: flex;
+      gap: 20px;
+    }
+
+    .column {
+      flex: 1;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #1f618d;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #154360;
+    }
+
+    hr {
+      margin: 30px 0;
+      border: none;
+      height: 2px;
+      background-color: #ccddee;
+    }
+
+    /* Resume Styling */
+    #resume {
+      background-color: #ffffff;
+      max-width: 900px;
+      margin: auto;
+      padding: 30px;
+      border-radius: 8px;
+    }
+
+    #resume-header {
+      text-align: center;
+      border-bottom: 3px solid #1f618d;
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+    }
+
+    #resume-header h1 {
+      margin: 0;
+      color: #1f3a5f;
+    }
+
+    #resume-header p {
+      margin: 5px 0;
+      font-size: 14px;
+    }
+
+    .resume-section {
+      margin-bottom: 20px;
+    }
+
+    .resume-section h2 {
+      color: #1f618d;
+      border-bottom: 2px solid #d6eaf8;
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .skills-list span {
+      background-color: #eaf2f8;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Online Resume Builder</h1>
+
+<form onsubmit="buildResume(); return false;">
+  <h3>Personal Information</h3>
+
+  <div class="row">
+    <div class="column">
+      Name:
+      <input type="text" id="name" required>
+    </div>
+    <div class="column">
+      Email:
+      <input type="email" id="email" required>
+    </div>
+  </div>
+  <br>
+
+  <div class="row">
+    <div class="column">
+      Phone:
+      <input type="text" id="phone" required>
+    </div>
+    <div class="column">
+      Location:
+      <input type="text" id="location" required>
+    </div>
+  </div>
+  <br>
+
+  <h3>Professional Summary</h3>
+  <textarea id="summary" rows="4" required></textarea><br><br>
+
+  <h3>Skills (comma separated)</h3>
+  <input type="text" id="skills" required><br><br>
+
+  <div class="row">
+    <div class="column">
+      <h3>Experience</h3>
+      <textarea id="experience" rows="5" required></textarea>
+    </div>
+    <div class="column">
+      <h3>Education</h3>
+      <textarea id="education" rows="5" required></textarea>
+    </div>
+  </div>
+  <br>
+
+  <h3>Projects</h3>
+  <textarea id="projects" rows="4" required></textarea><br><br>
+
+  <button type="submit">Build Resume</button>
+</form>
+
+<hr>
+
+<div id="resume"></div>
+
+<script>
+  function buildResume() {
+    var name = document.getElementById("name").value;
+    var email = document.getElementById("email").value;
+    var phone = document.getElementById("phone").value;
+    var location = document.getElementById("location").value;
+    var summary = document.getElementById("summary").value;
+    var skills = document.getElementById("skills").value.split(",");
+    var experience = document.getElementById("experience").value;
+    var education = document.getElementById("education").value;
+    var projects = document.getElementById("projects").value;
+
+    var resumeHTML = `
+      <div id="resume-header">
+        <h1>${name}</h1>
+        <p><strong>Email:</strong> ${email} | <strong>Phone:</strong> ${phone} | <strong>Location:</strong> ${location}</p>
+      </div>
+
+      <div class="resume-section">
+        <h2>Professional Summary</h2>
+        <p>${summary}</p>
+      </div>
+
+      <div class="resume-section">
+        <h2>Skills</h2>
+        <div class="skills-list">
+          ${skills.map(skill => `<span>${skill.trim()}</span>`).join("")}
+        </div>
+      </div>
+
+      <div class="resume-section">
+        <h2>Experience</h2>
+        <p>${experience}</p>
+      </div>
+
+      <div class="resume-section">
+        <h2>Education</h2>
+        <p>${education}</p>
+      </div>
+
+      <div class="resume-section">
+        <h2>Projects</h2>
+        <p>${projects}</p>
+      </div>
+    `;
+
+    document.getElementById("resume").innerHTML = resumeHTML;
+  }
+</script>
+
+</body>
+</html>
