@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Online Resume Builder</title>
+</head>
+<body>
+
+  <h1>Online Resume Builder</h1>
+
+  <form onsubmit="buildResume(); return false;">
+    <h3>Personal Information</h3>
+    Name: <input type="text" id="name"><br><br>
+    Email: <input type="email" id="email"><br><br>
+    Phone: <input type="text" id="phone"><br><br>
+    Location: <input type="text" id="location"><br><br>
+
+    <h3>Professional Summary</h3>
+    <textarea id="summary" rows="4" cols="50"></textarea><br><br>
+
+    <h3>Skills (comma separated)</h3>
+    <input type="text" id="skills"><br><br>
+
+    <h3>Experience</h3>
+    <textarea id="experience" rows="4" cols="50"></textarea><br><br>
+
+    <h3>Education</h3>
+    <textarea id="education" rows="3" cols="50"></textarea><br><br>
+
+    <h3>Projects</h3>
+    <textarea id="projects" rows="3" cols="50"></textarea><br><br>
+
+    <button type="submit">Build Resume</button>
+  </form>
+
+  <hr>
+
+  <div id="resume"></div>
+
+  <script>
+    function buildResume() {
+      var name = document.getElementById("name").value;
+      var email = document.getElementById("email").value;
+      var phone = document.getElementById("phone").value;
+      var location = document.getElementById("location").value;
+      var summary = document.getElementById("summary").value;
+      var skills = document.getElementById("skills").value.split(",");
+      var experience = document.getElementById("experience").value;
+      var education = document.getElementById("education").value;
+      var projects = document.getElementById("projects").value;
+
+      var resumeHTML = "<h1>" + name + "</h1>";
+      resumeHTML += "<p>" + email + " | " + phone + " | " + location + "</p>";
+      resumeHTML += "<h2>Professional Summary</h2><p>" + summary + "</p>";
+      resumeHTML += "<h2>Skills</h2><ul>";
+
+      for (var i = 0; i < skills.length; i++) {
+        resumeHTML += "<li>" + skills[i].trim() + "</li>";
+      }
+
+      resumeHTML += "</ul>";
+      resumeHTML += "<h2>Experience</h2><p>" + experience + "</p>";
+      resumeHTML += "<h2>Education</h2><p>" + education + "</p>";
+      resumeHTML += "<h2>Projects</h2><p>" + projects + "</p>";
+
+      document.getElementById("resume").innerHTML = resumeHTML;
+    }
+  </script>
+
+</body>
+</html>
